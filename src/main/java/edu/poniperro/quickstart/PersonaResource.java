@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,14 +23,28 @@ public class PersonaResource {
         return this.service.getAll();
     }
 
-    @GET
+//    @GET
+//    // {...} = eso significa que la ruta es dinámica
+//    @Path("/{id}")
+//    // lo que va a devolve
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Optional<Persona> getById(@PathParam("id") Long idPersona){
+//        return this.service.getById(idPersona);
+//    }
+
+
+      @GET
     // {...} = eso significa que la ruta es dinámica
-    @Path("/{id}")
-    // lo que va a devolve
-    @Produces(MediaType.APPLICATION_JSON)
-    public Optional<Persona> getById(@PathParam("id") Long idPersona){
-        return this.service.getById(idPersona);
-    }
+      @Path("/{id}")
+      // lo que va a devolve
+      @Produces(MediaType.APPLICATION_JSON)
+      public Response getById(@PathParam("id") Long idPersona){
+        Optional<Persona> persona = service.getById(idPersona);
+
+        return persona.isPresent()
+        ? Response.status(Response.Status.OK).entity(persona.get()).build()
+        : Response.status(Response.Status.NOT_FOUND).build();
+     }
 
 
     @DELETE

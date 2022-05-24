@@ -1,6 +1,7 @@
 package edu.poniperro.quickstart;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.core.Response;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,12 +23,11 @@ public class PersonaService {
     }
 
     public void deletePersona(String nombre) {
-        Persona persona1 = Persona.find("nombre", nombre).firstResult();
-        persona1.delete();
+        Persona sujeto = Persona.find("nombre", nombre).firstResult();
+        sujeto.delete();
     }
 
-    public void postPersona (Persona persona){
+    public void postPersona(Persona persona) {
         persona.persist();
     }
-
 }
