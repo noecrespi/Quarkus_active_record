@@ -7,8 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-// Es para inyectar cosas
-@ApplicationScoped
+// Es para inyectar cosas@ApplicationScoped
 public class PersonaService {
 
     public Set<Persona> getAll() {
@@ -16,6 +15,8 @@ public class PersonaService {
         // .collect() = transformar un stream a un tipo de lista.
         return personas.collect(Collectors.toSet());
     }
+
+    
 
     public Optional<Persona> getById(Long idPersona) {
         // mirar repo de Victor
